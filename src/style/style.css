@@ -104,5 +104,11 @@ input {
 .task-complete span span:nth-child(1){
   text-decoration: line-through;
 }
-
-
+.hidden {
+visibility: hidden;
+}
+.error-message {
+  font-size: 15px;
+  margin: 10px 0 0 10px;
+  color: red;
+}

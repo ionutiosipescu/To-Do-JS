@@ -1,10 +1,9 @@
 class Task {
   id = (Date.now() + "").slice(-10);
 
-  constructor(status = "undone", text, statusText = "Done") {
+  constructor(status = "undone", text) {
     this.status = status;
     this.text = text;
-    this.statusText = statusText;
     this._setDate();
   }
   _setDate() {
@@ -24,11 +23,8 @@ const btnSubmit = document.querySelector(".btn-submit");
 const ulTasks = document.querySelector(".task-group");
 const liItem = document.querySelector(".task-item");
 const btnRemove = document.querySelectorAll(".btn-remove");
-// const dropdown = document.querySelector(".dropdown");
-
-var select = document.querySelector("dropdown");
-var text = select.options[select.selectedIndex].text;
-console.log(text);
+const dropdown = document.querySelector(".dropdown");
+const errorMessage = document.querySelector(".error-message");
 
 class App {
   tasks = [];
@@ -37,29 +33,41 @@ class App {
     // Get data and render from localStorage
 
     this._getLocalStorage();
-    // Submit new task
+    // Event Handler
     form.addEventListener("submit", this._newTask.bind(this));
     ulTasks.addEventListener("click", this._removeTask.bind(this));
     ulTasks.addEventListener("click", this._changeStatus.bind(this));
+    dropdown.addEventListener("click", this._filterTodo.bind(this));
   }
   _newTask(e) {
     // get task variables
     const text = input.value;
     let task;
     // prevent default
+    console.log(text.length);
     e.preventDefault();
-    // Create new object
-    task = new Task(undefined, text);
-    // add object to arr
-    this.tasks.push(task);
-    // clear fields
-    input.value = "";
+    if (text === "" || text.length > 40) {
+      input.style.border = "3px solid red";
+      errorMessage.classList.remove("hidden");
+      console.log("something");
+      return;
+    } else {
+      errorMessage.classList.add("hidden");
 
-    // render task
-    this._renderTask(task);
-    // add to LocalStorage
-    this._setLocalStorage();
-    console.log(task);
+      input.style.border = "";
+      // Create new object
+      task = new Task(undefined, text);
+      // add object to arr
+      this.tasks.push(task);
+      // clear fields
+      input.value = "";
+
+      // render task
+      this._renderTask(task);
+      // add to LocalStorage
+      this._setLocalStorage();
+      console.log(task);
+    }
   }
   _renderTask(task) {
     // prettier-ignore
@@ -78,7 +86,7 @@ class App {
       </span>
     </li>
       `;
-    console.log(task.status);
+    // console.log(task.status);
     ulTasks.insertAdjacentHTML("afterbegin", html);
   }
 
@@ -149,6 +157,31 @@ class App {
       arr[index].status = "undone";
     }
   }
+  _filterTodo(e) {
+    const todos = ulTasks.childNodes;
+    todos.forEach(function (todo) {
+      if (!todo.classList) return;
+      switch (e.target.value) {
+        case "All":
+          todo.style.display = "flex";
+          break;
+        case "Complete":
+          if (todo.classList.contains("task-complete")) {
+            todo.style.display = "flex";
+          } else {
+            todo.style.display = "none";
+          }
+          break;
+        case "Undone":
+          if (!todo.classList.contains("task-complete")) {
+            todo.style.display = "flex";
+          } else {
+            todo.style.display = "none";
+          }
+      }
+    });
+  }
+
   reset() {
     localStorage.removeItem("tasks");
   }
