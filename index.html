@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -11,14 +16,20 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./src/style/style.css" />
+    <link rel="stylesheet" href="./src/style/background.style.scss" />
     <title>Task List</title>
   </head>
-  <body>
+  <body class="a">
     <div class="container">
       <header>
-        <h1>Task List 2022</h1>
+        <div class="typewriter">
+          <h1>Task List 2022</h1>
+        </div>
         <form class="form">
-          <input type="text" class="form_field" />
+          <input
+            type="text"
+            class="form_field"
+            placeholder="Write your tasks here ..." />
           <button class="btn btn-submit" type="submit">
             <span>Add Task</span>
           </button>
@@ -28,7 +39,7 @@
       <div class="container-list">
         <h2>Tasks:</h2>
         <select class="dropdown">
-          <option style="display: none">Filter</option>
+          <option class="first" style="display: none">Filter</option>
           <option class="op">All</option>
           <option class="op">Complete</option>
           <option class="op">Undone</option>
@@ -36,6 +47,9 @@
         <ul class="task-group"></ul>
       </div>
     </div>
+    <div class="circle1"></div>
+    <div class="circle2"></div>
     <script src="./src/js/script.js"></script>
+    <script src="./src/js/background.script.js"></script>
   </body>
 </html>

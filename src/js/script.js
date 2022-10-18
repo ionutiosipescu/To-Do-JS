@@ -49,7 +49,6 @@ class App {
     if (text === "" || text.length > 40) {
       input.style.border = "3px solid red";
       errorMessage.classList.remove("hidden");
-      console.log("something");
       return;
     } else {
       errorMessage.classList.add("hidden");
