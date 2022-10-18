@@ -142,19 +142,19 @@ class App {
     const btn = e.target.closest(".btn-mark");
     // Guard Clouse
     if (!btn) return;
-
+    // take index of task
     const [markedEl, arr, index] = this._checkIndex(e);
-
+    // add or remove class
     markedEl.classList.toggle("task-complete");
-
+    // remove animation class
     markedEl.classList.remove("animate__fadeInDown");
-
+    // add or remove animation class
     markedEl.classList.toggle("animate__pulse");
-
+    // condition
     const validate = markedEl.classList.contains("task-complete");
-
+    // update task based on contition
     this._checkValidate(validate, arr, index, btn);
-
+    // update local storage
     this._setLocalStorage();
   }
   // GET INDEX OF CLICKED TASK
@@ -164,14 +164,16 @@ class App {
     const index = arr.findIndex((el) => el.id === markedEl.dataset.id);
     return [markedEl, arr, index];
   }
-  // UPDATE TASK BY VALIDATE
+  // UPDATE TASK BASED  ON CONDITION
   _checkValidate(validate, arr, index, btn) {
     if (validate) {
+      // Switch to task complete
       btn.textContent = "Undone";
       btn.classList.remove("btn-complete");
       btn.classList.add("btn-uncomplete");
       arr[index].status = "complete";
     } else {
+      // Switch to task undone
       btn.textContent = "Done";
       btn.classList.remove("btn-uncomplete");
       btn.classList.add("btn-complete");
@@ -180,25 +182,28 @@ class App {
   }
   // FILTER TASKS
   _filterTodo(e) {
-    const todos = ulTasks.childNodes;
-    todos.forEach(function (todo) {
-      if (!todo.classList) return;
+    // take arr of childnodes
+    const arrTasks = ulTasks.childNodes;
+    // show or hide task based on selected option
+    arrTasks.forEach(function (task) {
+      // Guard Closure
+      if (!task.classList) return;
       switch (e.target.value) {
         case "All":
-          todo.style.display = "flex";
+          task.style.display = "flex";
           break;
         case "Complete":
-          if (todo.classList.contains("task-complete")) {
-            todo.style.display = "flex";
+          if (task.classList.contains("task-complete")) {
+            task.style.display = "flex";
           } else {
-            todo.style.display = "none";
+            task.style.display = "none";
           }
           break;
         case "Undone":
-          if (!todo.classList.contains("task-complete")) {
-            todo.style.display = "flex";
+          if (!task.classList.contains("task-complete")) {
+            task.style.display = "flex";
           } else {
-            todo.style.display = "none";
+            task.style.display = "none";
           }
       }
     });
