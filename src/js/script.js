@@ -83,7 +83,7 @@ class App {
 
     // Markup for Task
     let html = `
-      <li class="task-item animate__animated animate__fadeInDown ${markupStatusItem}" data-id="${task.id}">
+      <li class="task-item animate__animated animate__fadeInDown animate__fast ${markupStatusItem}" data-id="${task.id}">
       <span class="task-info"
         ><span class="text">${task.text}</span
         ><span class="date">${task.date}</span></span
@@ -131,7 +131,7 @@ class App {
       this._setLocalStorage();
       // remove task from dom
     }
-
+    // wait for animation to finish then remove task from dom
     markedEl.addEventListener("animationend", () => {
       markedEl.remove();
     });
@@ -186,7 +186,7 @@ class App {
     const arrTasks = ulTasks.childNodes;
     // show or hide task based on selected option
     arrTasks.forEach(function (task) {
-      // Guard Closure
+      // Guard
       if (!task.classList) return;
       switch (e.target.value) {
         case "All":
