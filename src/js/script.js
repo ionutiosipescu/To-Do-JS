@@ -1,3 +1,4 @@
+// Task Object
 class Task {
   id = (Date.now() + "").slice(-10);
 
@@ -30,22 +31,25 @@ class App {
   tasks = [];
   constructor() {
     // this.reset();
-    // Get data and render from localStorage
 
+    // Get data from localStorage and render tasks
     this._getLocalStorage();
-    // Event Handler
+
+    // Event Handlers
     form.addEventListener("submit", this._newTask.bind(this));
     ulTasks.addEventListener("click", this._removeTask.bind(this));
     ulTasks.addEventListener("click", this._changeStatus.bind(this));
     dropdown.addEventListener("click", this._filterTodo.bind(this));
   }
+  // CREATE TASK
   _newTask(e) {
     // get task variables
     const text = input.value;
     let task;
-    // prevent default
-    console.log(text.length);
+
     e.preventDefault();
+
+    // Show or hide error message
     if (text === "" || text.length > 40) {
       input.style.border = "3px solid red";
       errorMessage.classList.remove("hidden");
@@ -65,15 +69,19 @@ class App {
       this._renderTask(task);
       // add to LocalStorage
       this._setLocalStorage();
-      console.log(task);
     }
   }
+  // RENDER TASK
   _renderTask(task) {
+    // ternary variables
+
     // prettier-ignore
     let markupStatusItem = `${ task.status === "complete" ? "task-complete" : ""}`;
     let markupTextBtn = `${task.status === "complete" ? "Undone" : "Done"}`;
     // prettier-ignore
     let markupClassBtn = `${task.status === "complete" ? "btn-uncomplete" : "btn-complete"}`;
+
+    // Markup for Task
     let html = `
       <li class="task-item animate__animated animate__fadeInDown ${markupStatusItem}" data-id="${task.id}">
       <span class="task-info"
@@ -85,12 +93,14 @@ class App {
       </span>
     </li>
       `;
+    // Add html to <ul>
     ulTasks.insertAdjacentHTML("afterbegin", html);
   }
-
+  // SEND DATA TO LOCAL STORAGE
   _setLocalStorage() {
     localStorage.setItem("tasks", JSON.stringify(this.tasks));
   }
+  // GET DATA FROM LOCAL STORAGE AND RENDER EACH TASK
   _getLocalStorage() {
     const data = JSON.parse(localStorage.getItem("tasks"));
 
@@ -102,9 +112,8 @@ class App {
       this._renderTask(task);
     });
   }
-
+  // REMOVE TASK
   _removeTask(e) {
-    // get removeBtn
     const btn = e.target.closest(".btn-remove");
     // Guard Close
     if (!btn) return;
@@ -127,7 +136,7 @@ class App {
       markedEl.remove();
     });
   }
-
+  // CHANGE STATUS OF TASK
   _changeStatus(e) {
     // take btn
     const btn = e.target.closest(".btn-mark");
@@ -148,12 +157,14 @@ class App {
 
     this._setLocalStorage();
   }
+  // GET INDEX OF CLICKED TASK
   _checkIndex(e) {
     const markedEl = e.target.parentElement.parentElement;
     const arr = this.tasks;
     const index = arr.findIndex((el) => el.id === markedEl.dataset.id);
     return [markedEl, arr, index];
   }
+  // UPDATE TASK BY VALIDATE
   _checkValidate(validate, arr, index, btn) {
     if (validate) {
       btn.textContent = "Undone";
@@ -167,6 +178,7 @@ class App {
       arr[index].status = "undone";
     }
   }
+  // FILTER TASKS
   _filterTodo(e) {
     const todos = ulTasks.childNodes;
     todos.forEach(function (todo) {
@@ -191,7 +203,7 @@ class App {
       }
     });
   }
-
+  // REMOVE ALL TASKS FROM LOCAL STORAGE
   reset() {
     localStorage.removeItem("tasks");
   }
