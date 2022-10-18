@@ -129,7 +129,6 @@ class App {
       arr.splice(index, 1);
       // update local storage
       this._setLocalStorage();
-      // remove task from dom
     }
     // wait for animation to finish then remove task from dom
     markedEl.addEventListener("animationend", () => {
