@@ -139,6 +139,7 @@ input {
 /* ul */
 .task-group {
   list-style-type: none;
+  overflow: hidden;
 }
 /* li */
 .task-item {
