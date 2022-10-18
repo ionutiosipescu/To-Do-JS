@@ -75,7 +75,7 @@ class App {
     // prettier-ignore
     let markupClassBtn = `${task.status === "complete" ? "btn-uncomplete" : "btn-complete"}`;
     let html = `
-      <li class="task-item ${markupStatusItem}" data-id="${task.id}">
+      <li class="task-item animate__animated animate__fadeInDown ${markupStatusItem}" data-id="${task.id}">
       <span class="task-info"
         ><span class="text">${task.text}</span
         ><span class="date">${task.date}</span></span
@@ -85,7 +85,6 @@ class App {
       </span>
     </li>
       `;
-    // console.log(task.status);
     ulTasks.insertAdjacentHTML("afterbegin", html);
   }
 
@@ -112,6 +111,9 @@ class App {
 
     const [markedEl, arr, index] = this._checkIndex(e);
 
+    markedEl.classList.remove("animate__fadeInDown");
+
+    markedEl.classList.add("animate__backOutRight");
     // if index is correct run:
     if (index > -1) {
       // remove object from arr
@@ -119,9 +121,13 @@ class App {
       // update local storage
       this._setLocalStorage();
       // remove task from dom
-      markedEl.remove();
     }
+
+    markedEl.addEventListener("animationend", () => {
+      markedEl.remove();
+    });
   }
+
   _changeStatus(e) {
     // take btn
     const btn = e.target.closest(".btn-mark");
@@ -131,6 +137,11 @@ class App {
     const [markedEl, arr, index] = this._checkIndex(e);
 
     markedEl.classList.toggle("task-complete");
+
+    markedEl.classList.remove("animate__fadeInDown");
+
+    markedEl.classList.toggle("animate__pulse");
+
     const validate = markedEl.classList.contains("task-complete");
 
     this._checkValidate(validate, arr, index, btn);
