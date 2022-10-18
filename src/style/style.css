@@ -17,8 +17,7 @@
   margin: 0;
   padding: 0;
 }
-
-
+/* Body */
 body {
 	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
 	background-size: 400% 400%;
@@ -29,6 +28,7 @@ body {
   align-items: center;
   display: flex;
   font-family: "Poppins", sans-serif;
+  overflow: hidden;
 }
 
 @keyframes gradient {
@@ -42,7 +42,7 @@ body {
 		background-position: 0% 50%;
 	}
 }
-
+/* Main Container */
 .container {
    box-shadow: 0 0 15px 10px rgba(0, 0, 0, 25%); 
    background-color: #ebebeb7d; 
@@ -60,9 +60,10 @@ body {
   position: relative;
   backdrop-filter: blur(7px);
 }
+/* Circles */
 .circle1,
 .circle2 {
-  background-color: white;
+  background-color: #fff;
   background: linear-gradient(to right bottom, rgba(255,255,255,0.9),rgba(255,255,255,0.1));
   height: 12rem;
   width: 12rem;
@@ -80,7 +81,7 @@ body {
 
 }
 
-
+/* HEADER */
 header {
   height: 100%;
   width: 100%;
@@ -90,7 +91,16 @@ header h1, .btn span, .container-list h2 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
+input {
+  all: unset;
+  padding: 10px;
+  border: 0;
+  box-shadow: 0 0 15px 4px rgb(0 0 0 / 6%);
+  border-radius: 10px;
+  background-color: #fff;
+  width: 70%;
+}
+/* CONTAINER LIST - { h2 , select , ul } */
 .container-list {
   width: 100%;
   margin: 50px 0 20px;
@@ -109,6 +119,7 @@ header h1, .btn span, .container-list h2 {
     width: 100px;
     cursor: pointer;
 }
+/* Buttons */
 .btn {
   all: unset;
   cursor: pointer;
@@ -125,18 +136,11 @@ header h1, .btn span, .container-list h2 {
 .btn-uncomplete {
   color: #141a1b;
 }
-input {
-  all: unset;
-  padding: 10px;
-  border: 0;
-  box-shadow: 0 0 15px 4px rgb(0 0 0 / 6%);
-  border-radius: 10px;
-  background-color: #fff;
-  width: 70%;
-}
+/* ul */
 .task-group {
   list-style-type: none;
 }
+/* li */
 .task-item {
   padding: 10px 20px;
   border: 0;
@@ -149,13 +153,16 @@ input {
   justify-content: space-between;
   align-items: center;
 }
+/* li {text, date} */
 .task-info {
   display: flex;
   flex-direction: column;
 }
+/* li date */
 .task-info .date {
   font-size: 14px;
 }
+/* Badges */
 .task-complete {
   background-color: lightgrey;
   opacity: 0.7;
@@ -163,6 +170,7 @@ input {
 .task-complete span span:nth-child(1){
   text-decoration: line-through;
 }
+/* error message */
 .hidden {
 visibility: hidden;
 }
@@ -194,8 +202,4 @@ visibility: hidden;
 @keyframes blink-caret {
   from, to { border-color: transparent }
   50% { border-color: #8634b6 }
-}
-.fall {
-transform: translateY(8rem) rotateZ(20deg);
-opacity: 0;
 }

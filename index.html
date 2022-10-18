@@ -9,25 +9,21 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
       rel="stylesheet" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./src/style/style.css" />
-    <link rel="stylesheet" href="./src/style/background.style.scss" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <title>Task List</title>
   </head>
-  <body class="a">
+  <body>
+    <!-- App -->
     <div class="container">
       <header>
+        <!-- Title -->
         <div class="typewriter">
           <h1>Task List 2022</h1>
         </div>
+        <!-- Form -->
         <form class="form">
           <input
             type="text"
@@ -37,8 +33,10 @@
             <span>Add Task</span>
           </button>
         </form>
+        <!-- Error Message -->
         <div class="error-message hidden">Invalid Input</div>
       </header>
+      <!-- Tasks List -->
       <div class="container-list">
         <h2>Tasks:</h2>
         <select class="dropdown">
@@ -50,6 +48,7 @@
         <ul class="task-group"></ul>
       </div>
     </div>
+    <!-- Circles Background -->
     <div class="circle1"></div>
     <div class="circle2"></div>
     <script src="./src/js/script.js"></script>
