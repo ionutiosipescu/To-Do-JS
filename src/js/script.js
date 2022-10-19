@@ -48,16 +48,10 @@ class App {
     let task;
 
     e.preventDefault();
+    // validate input value if create a task or return
+    const validator = this._errorRender(text);
 
-    // Show or hide error message
-    if (text === "" || text.length > 40) {
-      input.style.border = "3px solid red";
-      errorMessage.classList.remove("hidden");
-      return;
-    } else {
-      errorMessage.classList.add("hidden");
-
-      input.style.border = "";
+    if (validator) {
       // Create new object
       task = new Task(undefined, text);
       // add object to arr
@@ -69,6 +63,22 @@ class App {
       this._renderTask(task);
       // add to LocalStorage
       this._setLocalStorage();
+    } else return;
+  }
+
+  // SHOW OR HIDE ERROR MESSAGE
+  _errorRender(text) {
+    let validator = false;
+    if (text === "" || text.length > 40) {
+      input.style.border = "3px solid red";
+      errorMessage.classList.remove("hidden");
+      return validator;
+    } else {
+      validator = true;
+      errorMessage.classList.add("hidden");
+
+      input.style.border = "";
+      return validator;
     }
   }
   // RENDER TASK
